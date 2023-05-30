@@ -10,8 +10,16 @@
         VALUES
         ( #{title}, #{ctnt}, #{iuser} )
 
-
     </insert>
+
+    <select id="selBoardList" resultType="BoardListVo">
+        SELECT iboard, title, iuser, created_at createdAt
+        FROM t_board
+        ORDER BY iboard desc
+        LIMIT ${startIdx}, ${rowLen}
+
+
+    </select>
 
 
 
