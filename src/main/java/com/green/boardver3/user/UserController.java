@@ -2,12 +2,10 @@ package com.green.boardver3.user;
 
 import com.green.boardver3.user.model.UserInsEntity;
 import com.green.boardver3.user.model.UserLoginDto;
+import com.green.boardver3.user.model.UserUpdPwDto;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
@@ -39,5 +37,10 @@ public class UserController {
     public int postLoginUser(@RequestBody UserLoginDto dto) {
         return SERVICE.login(dto);
     }
+    @PatchMapping("/pw")
+    public int updPw (@RequestBody UserUpdPwDto dto) {
+       return SERVICE.updUserPw(dto);
+    }
+
 }
 

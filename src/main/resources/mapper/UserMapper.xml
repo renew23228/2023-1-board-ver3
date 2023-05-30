@@ -16,4 +16,11 @@
         from t_user
         where uid = #{uid}
     </select>
+
+    <update id="updPw" >
+        UPDATE t_user
+        set
+        upw = #{upw}
+        where iuser = #{iuser}
+    </update>
 </mapper>
