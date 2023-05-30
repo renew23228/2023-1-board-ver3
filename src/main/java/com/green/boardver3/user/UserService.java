@@ -1,6 +1,7 @@
 package com.green.boardver3.user;
 
 import com.green.boardver3.user.model.UserInsEntity;
+import com.green.boardver3.user.model.UserLoginDto;
 import com.green.boardver3.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,5 +37,10 @@ public class UserService {
 //            return 0;
 //        }
         return MAPPER.insUser(entity);
+
+    }
+
+    public int login(UserLoginDto dto) {
+        return 0;
     }
 }

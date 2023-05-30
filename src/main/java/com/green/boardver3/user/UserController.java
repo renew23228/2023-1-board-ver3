@@ -1,6 +1,7 @@
 package com.green.boardver3.user;
 
 import com.green.boardver3.user.model.UserInsEntity;
+import com.green.boardver3.user.model.UserLoginDto;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +28,16 @@ public class UserController {
             "addr: [100] 대구시 달서구")
     public int postUser (@RequestBody UserInsEntity entity) {
         return SERVICE.postUser(entity);
+    }
+
+    @PostMapping("/login")
+    @Operation(summary = "로그인", description = "" +
+            "리턴값: :+" +
+            "(1)로그인 성공, "+
+            "(2)아이디 없음, "+
+            "(3)비밀번호 다름")
+    public int postLoginUser(@RequestBody UserLoginDto dto) {
+        return SERVICE.login(dto);
     }
 }
 
