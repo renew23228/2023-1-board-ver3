@@ -27,6 +27,14 @@ public class UserService {
         //비밀번호 암호화
         String hashPw = commonUtils.encodeSha256(entity.getUpw());
         entity.setUpw(hashPw);
+
+        // 서버가 터지지 않고 예외잡기
+//        try{
+//            return MAPPER.insUser(entity);
+//        } catch (Exception e){
+//            e.printStackTrace();
+//            return 0;
+//        }
         return MAPPER.insUser(entity);
     }
 }
