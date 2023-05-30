@@ -1,5 +1,6 @@
-package com.green.boardver3;
+package com.green.boardver3.user;
 
+import com.green.boardver3.user.model.UserInsEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
