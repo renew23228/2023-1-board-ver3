@@ -18,6 +18,9 @@ public class UserService {
     }
 
     public int postUser(UserInsEntity entity) {
+        // 성별 대문자 변경
+        char gender = Character.toUpperCase(entity.getGender());
+        entity.setGender(gender);
         //비밀번호 암호화
         String hashPw = commonUtils.encodeSha256(entity.getUpw());
         entity.setUpw(hashPw);
