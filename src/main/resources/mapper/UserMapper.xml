@@ -23,4 +23,15 @@
         upw = #{upw}
         where iuser = #{iuser}
     </update>
+
+
+
+
+
+
+
+
+
+
+
 </mapper>
