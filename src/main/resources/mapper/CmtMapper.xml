@@ -10,7 +10,6 @@
         , iuser = #{iuser}
         , ctnt = #{ctnt}
 
-
     </insert>
 
 
