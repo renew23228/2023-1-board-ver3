@@ -37,4 +37,5 @@ public class BoardController {
         dto.setRow(row);
         return SERVICE.selBoard(dto);
     }
+
 }
