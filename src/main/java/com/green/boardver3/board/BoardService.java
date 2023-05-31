@@ -33,4 +33,5 @@ public class BoardService {
         return (int)Math.ceil((double) count / row);
     }
 
+
 }
