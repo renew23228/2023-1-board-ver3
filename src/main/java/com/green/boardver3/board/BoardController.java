@@ -32,10 +32,9 @@ public class BoardController {
     @GetMapping
     public List<BoardVo> getBoard(@RequestParam(defaultValue = "1") int page
             , @RequestParam(defaultValue = "30") int row) {
-        BoardSelDto dto = BoardSelDto.builder()
-                .page(page)
-                .row(row)
-                .build();
+        BoardSelDto dto = new BoardSelDto();
+        dto.setPage(page);
+        dto.setRow(row);
         return SERVICE.selBoard(dto);
     }
 }
