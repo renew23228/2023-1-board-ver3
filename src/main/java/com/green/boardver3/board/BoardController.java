@@ -49,6 +49,11 @@ public class BoardController {
         return SERVICE.selBoardDetail(dto);
     }
 
+    @PutMapping
+    public int putBoard(@RequestBody BoardUpdDto dto) {
+        return SERVICE.upbBoard(dto);
+    }
+
     @DeleteMapping
     public int delBoard(@RequestParam int iboard, @RequestParam int iuser) {
         BoardDelDto dto = new BoardDelDto();
