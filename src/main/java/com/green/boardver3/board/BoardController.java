@@ -1,8 +1,6 @@
 package com.green.boardver3.board;
 
-import com.green.boardver3.board.model.BoardDto;
-import com.green.boardver3.board.model.BoardInsDto;
-import com.green.boardver3.board.model.BoardListVo;
+import com.green.boardver3.board.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,11 +21,21 @@ public class BoardController {
         return SERVICE.postBoard(dto);
     }
 
+//    @GetMapping
+//    public List<BoardListVo> selBoardList(@RequestParam int page, @RequestParam int row){
+//        BoardDto dto = new BoardDto();
+//        dto.setPage(page);
+//        dto.setRowLen(row);
+//        return SERVICE.selBoardList(dto);
+//    }
+
     @GetMapping
-    public List<BoardListVo> selBoardList(@RequestParam int page, @RequestParam int row){
-        BoardDto dto = new BoardDto();
-        dto.setPage(page);
-        dto.setRowLen(row);
-        return SERVICE.selBoardList(dto);
+    public List<BoardVo> getBoard(@RequestParam(defaultValue = "1") int page
+            , @RequestParam(defaultValue = "30") int row) {
+        BoardSelDto dto = BoardSelDto.builder()
+                .page(page)
+                .row(row)
+                .build();
+        return SERVICE.selBoard(dto);
     }
 }

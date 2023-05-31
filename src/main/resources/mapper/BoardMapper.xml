@@ -17,8 +17,15 @@
         FROM t_board
         ORDER BY iboard desc
         LIMIT ${startIdx}, ${rowLen}
-
-
+    </select>
+    
+    <select id="selBoard" resultType="BoardVo">
+        SELECT A.iboard, A.title, A.created_at createdAt, B.nm writer
+        FROM t_board A
+        INNER JOIN t_user B
+        ON A.iuser = B.iuser
+        ORDER BY iboard DESC
+        LIMIT ${startIdx}, ${row};
     </select>
 
 
