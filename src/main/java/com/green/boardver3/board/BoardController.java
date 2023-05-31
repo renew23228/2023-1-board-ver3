@@ -41,4 +41,11 @@ public class BoardController {
     public int maxPage(@RequestParam int row){
         return SERVICE.maxPage(row);
     }
+
+    @GetMapping("/{iboard}")
+    public BoardVo selDetail (@PathVariable int iboard) {
+        BoardDto dto = new BoardDto();
+        dto.setIboard(iboard);
+        return SERVICE.selBoardDetail(dto);
+    }
 }
