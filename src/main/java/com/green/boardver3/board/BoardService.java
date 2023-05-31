@@ -28,5 +28,9 @@ public class BoardService {
         dto.setStartIdx(startIdx);
         return MAPPER.selBoard(dto);
     }
+    public int maxPage(int row) {
+        int count = MAPPER.selBoardMaxPage(row);
+        return (int)Math.ceil((double) count / row);
+    }
 
 }
