@@ -20,12 +20,12 @@
     </select>
     
     <select id="selBoard" resultType="BoardVo">
-        SELECT A.iboard, A.title, A.created_at createdAt, B.nm writer
+        SELECT A.iboard, A.title, A.created_at createdAt, B.nm writer, B.main_pic writerMainPic
         FROM t_board A
         INNER JOIN t_user B
         ON A.iuser = B.iuser
         ORDER BY iboard DESC
-        LIMIT ${startIdx}, ${row};
+        LIMIT ${startIdx}, ${row}
     </select>
 
     <select id="selBoardMaxPage" resultType="int">
@@ -33,4 +33,13 @@
         iboard, title, iuser, created_at createdAt
         FROM t_board
     </select>
+
+    <select id="selBoardDetail" resultType="BoardVo" >
+        SELECT A.iboard, A.title, A.created_at createdAt, B.nm writer, B.main_pic writerMainPic
+        FROM t_board A
+        INNER JOIN t_user B
+        ON A.iuser = B.iuser
+        where iboard = #{iboard}
+    </select>
+
 </mapper>
