@@ -32,7 +32,7 @@ public class BoardService {
         int count = MAPPER.selBoardMaxPage(row);
         return (int)Math.ceil((double) count / row);
     }
-    public BoardVo selBoardDetail(BoardDto dto) {
+    public BoardDetailVo selBoardDetail(BoardSelDto dto) {
         return MAPPER.selBoardDetail(dto);
     }
 }
