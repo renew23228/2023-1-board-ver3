@@ -16,7 +16,7 @@
         SELECT iboard, title, iuser, created_at createdAt
         FROM t_board
         ORDER BY iboard desc
-        LIMIT ${startIdx}, ${rowLen}
+        LIMIT #{startIdx}, #{rowLen}
     </select>
     
     <select id="selBoard" resultType="BoardVo">
@@ -25,7 +25,7 @@
         INNER JOIN t_user B
         ON A.iuser = B.iuser
         ORDER BY iboard DESC
-        LIMIT ${startIdx}, ${row}
+        LIMIT #{startIdx}, #{row}
     </select>
 
     <select id="selBoardMaxPage" resultType="int">
@@ -42,5 +42,12 @@
         ON A.iuser = B.iuser
         where A.iboard = #{iboard}
     </select>
+
+    <delete id="delBoard">
+        DELETE FROM t_board
+        WHERE iboard = #{iboard}
+        AND iuser = #{iuser}
+
+    </delete>
 
 </mapper>
