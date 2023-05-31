@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class BoardService {
@@ -35,4 +36,9 @@ public class BoardService {
     public BoardDetailVo selBoardDetail(BoardSelDto dto) {
         return MAPPER.selBoardDetail(dto);
     }
+    public int delBoard(BoardDelDto dto) {
+        return MAPPER.delBoard(dto);
+    }
+
+
 }
