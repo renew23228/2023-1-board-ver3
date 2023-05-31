@@ -36,6 +36,12 @@ public class BoardService {
     public BoardDetailVo selBoardDetail(BoardSelDto dto) {
         return MAPPER.selBoardDetail(dto);
     }
+
+    public int upbBoard(BoardUpdDto dto) {
+        return MAPPER.updBoard(dto);
+    }
+
+
     public int delBoard(BoardDelDto dto) {
         return MAPPER.delBoard(dto);
     }

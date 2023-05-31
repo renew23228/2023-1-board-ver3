@@ -43,11 +43,21 @@
         where A.iboard = #{iboard}
     </select>
 
+    <update id="updBoard">
+        update t_board
+        set title = #{title}
+        , ctnt = #{ctnt}
+        , updated_at = current_timestamp()
+        where iboard = #{iboard}
+        and iuser = #{iuser}
+    </update>
+
     <delete id="delBoard">
         DELETE FROM t_board
         WHERE iboard = #{iboard}
         AND iuser = #{iuser}
 
     </delete>
+
 
 </mapper>
