@@ -28,11 +28,9 @@
         LIMIT ${startIdx}, ${row};
     </select>
 
-
-
-
-
-
-
-
+    <select id="selBoardMaxPage" resultType="int">
+        SELECT count(1)
+        iboard, title, iuser, created_at createdAt
+        FROM t_board
+    </select>
 </mapper>
