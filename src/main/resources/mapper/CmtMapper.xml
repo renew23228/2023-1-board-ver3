@@ -28,6 +28,12 @@
         and iuser = #{iuser}
     </delete>
 
+    <update id="updBoardCmt">
+        UPDATE t_board_cmt
+        SET ctnt = #{ctnt},
+        updated_at = now()
+        WHERE iboard_cmt = #{iboardCmt} AND iuser = #{iuser}
+    </update>
 
 
 

@@ -41,4 +41,7 @@ public class CmtService {
     public int delBoardCmt(CmtDelDto dto) {
         return MAPPER.delBoardCmt(dto);
     }
+    public int updBoardCmt(CmtEntity entity){
+        return MAPPER.updBoardCmt(entity);
+    }
 }
