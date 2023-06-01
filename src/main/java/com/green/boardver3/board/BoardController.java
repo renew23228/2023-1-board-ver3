@@ -62,6 +62,4 @@ public class BoardController {
         return SERVICE.delBoard(dto);
     }
 
-
-
 }
