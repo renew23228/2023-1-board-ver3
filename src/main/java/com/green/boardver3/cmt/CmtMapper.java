@@ -11,4 +11,7 @@ public interface CmtMapper {
     List<CmtVo> selBoardCmt(CmtSelDto dto);
     int delBoardCmt(CmtDelDto dto);
     int updBoardCmt(CmtEntity entity);
+
+    int selMaxCmt(int row);
+
 }
