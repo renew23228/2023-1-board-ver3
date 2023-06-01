@@ -1,9 +1,6 @@
 package com.green.boardver3.cmt;
 
-import com.green.boardver3.cmt.model.CmtEntity;
-import com.green.boardver3.cmt.model.CmtInsDto;
-import com.green.boardver3.cmt.model.CmtSelDto;
-import com.green.boardver3.cmt.model.CmtVo;
+import com.green.boardver3.cmt.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,6 +37,14 @@ public class CmtController {
         dto.setRow(row);
         return SERVICE.selBoardCmt(dto);
 
+    }
 
+    @DeleteMapping("/cmt/{iboardCmt}")
+    public int delBoardCmt(@PathVariable int iboardCmt,
+                           @RequestParam int iuser) {
+        CmtDelDto dto = new CmtDelDto();
+        dto.setIboardCmt(iboardCmt);
+        dto.setIuser(iuser);
+        return SERVICE.delBoardCmt(dto);
     }
 }

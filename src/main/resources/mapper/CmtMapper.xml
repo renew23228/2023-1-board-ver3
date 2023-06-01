@@ -22,6 +22,12 @@
         LIMIT #{startIdx}, #{row}
     </select>
 
+    <delete id="delBoardCmt">
+        delete from t_board_cmt
+        where iboard_cmt = #{iboardCmt}
+        and iuser = #{iuser}
+    </delete>
+
 
 
 
