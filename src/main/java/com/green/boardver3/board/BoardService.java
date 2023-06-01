@@ -48,7 +48,7 @@ public class BoardService {
     }
 //    내가 갖고있는 DB의 최대 페이지값 리턴하기
     public int maxPage(int row) {
-        int count = MAPPER.selBoardMaxPage(row);
+        int count = MAPPER.selBoardMaxPage();
         return (int)Math.ceil((double) count / row);
     }
 //    게시글전체 중 하나만 디테일로 보기 ctnt 포함 됨

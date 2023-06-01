@@ -36,5 +36,13 @@
     </update>
 
 
+    <select id="selMaxCmt" resultType="int">
+        SELECT COUNT(iboard)
+        FROM t_board_cmt
+        WHERE iboard=#{iboard}
+
+    </select>
+
+
 
 </mapper>

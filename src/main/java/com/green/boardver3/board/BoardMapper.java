@@ -8,7 +8,7 @@ import java.util.List;
 @Mapper
 public interface BoardMapper {
     int insBoard(BoardEntity dto);
-    int selBoardMaxPage(int row);
+    int selBoardMaxPage();
     BoardDetailVo selBoardDetail(BoardSelDto dto);
     int updBoard(BoardUpdDto dto);
     int delBoard(BoardDelDto dto);

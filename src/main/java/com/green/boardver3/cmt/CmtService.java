@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class CmtService {
@@ -32,10 +33,22 @@ public class CmtService {
     //iboardCmt, 나중에 우리가 엔터티를 만들거다 왜? 이거보고 나중에 테이블을 만들거다
 
 
-    public List<CmtVo> selBoardCmt(CmtSelDto dto) {
+    public CmtRes selBoardCmt(CmtSelDto dto) {
         int startIdx = (dto.getPage() -1) * dto.getRow();
         dto.setStartIdx(startIdx);
-        return MAPPER.selBoardCmt(dto);
+        List<CmtVo> list = MAPPER.selBoardCmt(dto);
+
+        int rowLen = MAPPER.selMaxCmt(dto.getIboard());
+        int maxPage = (int)(Math.ceil((double) rowLen/dto.getRow()));
+        int isMore = ( dto.getPage() < maxPage) ? 1 : 0;
+
+        return CmtRes.builder()
+                .list(list)
+                .row(dto.getRow())
+                .maxPage(maxPage)
+                .isMore(isMore)
+                .build();
+
     }
 
     public int delBoardCmt(CmtDelDto dto) {
