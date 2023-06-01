@@ -9,9 +9,9 @@ public class CmtVo {
     private int iboardCmt;
     private int iboard;
     private int iuser;
-    private String writer;
-    private String writerMainPic;
     private String ctnt;
     private String createdAt;
+    private String writer;
+    private String writerMainPic;
 
 }
