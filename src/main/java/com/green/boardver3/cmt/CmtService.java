@@ -41,10 +41,12 @@ public class CmtService {
         int rowLen = MAPPER.selMaxCmt(dto.getIboard());
         int maxPage = (int)(Math.ceil((double) rowLen/dto.getRow()));
         int isMore = ( dto.getPage() < maxPage) ? 1 : 0;
+        int rowByPage = ( dto.getPage() == maxPage)? rowLen % dto.getRow() : dto.getRow();
+
 
         return CmtRes.builder()
                 .list(list)
-                .row(dto.getRow())
+                .row(rowByPage)
                 .maxPage(maxPage)
                 .isMore(isMore)
                 .build();
