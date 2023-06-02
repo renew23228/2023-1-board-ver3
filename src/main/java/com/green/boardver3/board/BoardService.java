@@ -1,8 +1,11 @@
 package com.green.boardver3.board;
 
 import com.green.boardver3.board.model.*;
+import com.green.boardver3.cmt.CmtMapper;
+import com.green.boardver3.cmt.model.CmtDelDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -10,10 +13,12 @@ import java.util.Map;
 @Service
 public class BoardService {
     private final BoardMapper MAPPER;
+    private final CmtMapper cmtMapper;
 
     @Autowired
-    public BoardService(BoardMapper mapper){
+    public BoardService(BoardMapper mapper, CmtMapper cmtMapper){
         this.MAPPER = mapper;
+        this.cmtMapper = cmtMapper;
     }
 
 //    insert문 작성과 작성 후 내가 작성한 게시글 바로 볼 수 있게 하기
@@ -61,8 +66,19 @@ public class BoardService {
     }
 
 //   delete문 작성하기
-    public int delBoard(BoardDelDto dto) {
-        return MAPPER.delBoard(dto);
+    @Transactional(rollbackFor = Exception.class)
+    public int delBoard(BoardDelDto dto) throws Exception {
+
+        CmtDelDto cmtDto = new CmtDelDto();
+        cmtDto.setIboard(dto.getIboard());
+        cmtMapper.delBoardCmt(cmtDto);
+        // 그 글에 달려있는 댓글을 전부 삭제해야함.
+        int result = 0;
+        result = MAPPER.delBoard(dto);
+        if (result == 0) {
+            throw new Exception("삭제 권한 없음");
+        }
+        return result;
     }
 
 

@@ -55,10 +55,7 @@ public class BoardController {
     }
 
     @DeleteMapping
-    public int delBoard(@RequestParam int iboard, @RequestParam int iuser) {
-        BoardDelDto dto = new BoardDelDto();
-        dto.setIboard(iboard);
-        dto.setIuser(iuser);
+    public int delBoard(@RequestBody BoardDelDto dto) throws Exception {
         return SERVICE.delBoard(dto);
     }
 
