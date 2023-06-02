@@ -1,21 +1,27 @@
 package com.green.boardver3.user;
 
-import com.green.boardver3.user.model.UserInsEntity;
-import com.green.boardver3.user.model.UserLoginDto;
-import com.green.boardver3.user.model.UserLoginVo;
-import com.green.boardver3.user.model.UserUpdPwDto;
+import com.green.boardver3.user.model.*;
 import com.green.boardver3.utils.CommonUtils;
+import com.green.boardver3.utils.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+
+import static com.green.boardver3.utils.FileUtils.makeRandomFileNm;
 
 @Service
 public class UserService {
     private final UserMapper MAPPER;
     private final CommonUtils commonUtils;
 
+    @Value("${file.dir}")
+    private String fileDir;
+
     @Autowired
     public UserService(UserMapper mapper, CommonUtils commonUtils) {
-
         this.MAPPER = mapper;
         this.commonUtils = commonUtils;
     }
@@ -56,5 +62,38 @@ public class UserService {
         String hashedPw = commonUtils.encodeSha256(dto.getUpw());
         dto.setUpw(hashedPw);
         return MAPPER.updPw(dto);
+    }
+
+    public int updUserPic(MultipartFile pic , UserPatchPicDto dto) {
+        String centerPath = String.format("user/%d", dto.getIuser());
+        String dicPath = String.format("%s/%s", fileDir, centerPath);
+
+        File dic = new File(dicPath);
+        if(!dic.exists()) {
+            dic.mkdirs();
+        }
+
+        String originFileName = pic.getOriginalFilename();
+        String savedFileName = FileUtils.makeRandomFileNm(originFileName);
+        String savedFilePath = String.format("%s/%s", centerPath, savedFileName);
+        String targetPath = String.format("%s/%s", fileDir, savedFilePath);
+        File target = new File(targetPath);
+        try {
+            pic.transferTo(target);
+        }catch (Exception e) {
+            return 0;
+        }
+        dto.setMainPic(savedFilePath);
+        try {
+            int result = MAPPER.updUserPic(dto);
+            if(result == 0) {
+                throw new Exception("프로필 사진을 등록할 수 없습니다.");
+            }
+        } catch (Exception e) {
+            //파일 삭제
+            target.delete();
+            return 0;
+        }
+        return 1;
     }
 }
