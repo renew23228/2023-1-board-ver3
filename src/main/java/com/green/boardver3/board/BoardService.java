@@ -4,6 +4,8 @@ import com.green.boardver3.board.model.*;
 import com.green.boardver3.cmt.CmtMapper;
 import com.green.boardver3.cmt.CmtService;
 import com.green.boardver3.cmt.model.CmtDelDto;
+import com.green.boardver3.cmt.model.CmtRes;
+import com.green.boardver3.cmt.model.CmtSelDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,9 +59,20 @@ public class BoardService {
         int count = MAPPER.selBoardMaxPage();
         return (int)Math.ceil((double) count / row);
     }
+    int page = 1;
+    int row = 5;
 //    게시글전체 중 하나만 디테일로 보기 ctnt 포함 됨
-    public BoardDetailVo selBoardDetail(BoardSelDto dto) {
-        return MAPPER.selBoardDetail(dto);
+    public Cmt selBoardDetail(BoardSelDto dto) {
+        BoardDetailVo vo = MAPPER.selBoardDetail(dto);
+        CmtSelDto selDto = new CmtSelDto();
+        selDto.setRow(row);
+        selDto.setPage(page);
+        selDto.setIboard(dto.getIboard());
+        CmtRes cmt = cmtService.selBoardCmt(selDto);
+        return Cmt.builder()
+                .vo(vo)
+                .cmt(cmt)
+                .build();
     }
 //   update문 작성하기
     public int upbBoard(BoardUpdDto dto) {
