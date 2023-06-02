@@ -2,6 +2,7 @@ package com.green.boardver3.board;
 
 import com.green.boardver3.board.model.*;
 import com.green.boardver3.cmt.CmtMapper;
+import com.green.boardver3.cmt.CmtService;
 import com.green.boardver3.cmt.model.CmtDelDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,12 +14,12 @@ import java.util.Map;
 @Service
 public class BoardService {
     private final BoardMapper MAPPER;
-    private final CmtMapper cmtMapper;
+    private final CmtService cmtService;
 
     @Autowired
-    public BoardService(BoardMapper mapper, CmtMapper cmtMapper){
+    public BoardService(BoardMapper mapper, CmtService cmtService){
         this.MAPPER = mapper;
-        this.cmtMapper = cmtMapper;
+        this.cmtService = cmtService;
     }
 
 //    insert문 작성과 작성 후 내가 작성한 게시글 바로 볼 수 있게 하기
@@ -71,7 +72,7 @@ public class BoardService {
 
         CmtDelDto cmtDto = new CmtDelDto();
         cmtDto.setIboard(dto.getIboard());
-        cmtMapper.delBoardCmt(cmtDto);
+        cmtService.delBoardCmt(cmtDto);
         // 그 글에 달려있는 댓글을 전부 삭제해야함.
         int result = 0;
         result = MAPPER.delBoard(dto);
