@@ -3,6 +3,7 @@ package com.green.boardver3.utils;
 
 import lombok.Data;
 
+import java.nio.file.Paths;
 import java.util.UUID;
 
 
@@ -23,5 +24,10 @@ public class FileUtils {
         String uuid = UUID.randomUUID().toString();
         String saveNm = uuid + getExt(fileNm);
         return saveNm;
+    }
+
+    //절대경로 리턴
+    public static String getAbsolutePath(String src) {
+        return Paths.get(src).toFile().getAbsolutePath();
     }
 }

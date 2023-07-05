@@ -66,7 +66,7 @@ public class UserService {
 
     public int updUserPic(MultipartFile pic , UserPatchPicDto dto) {
         String centerPath = String.format("user/%d", dto.getIuser());
-        String dicPath = String.format("%s/%s", fileDir, centerPath);
+        String dicPath = String.format("%s/%s", FileUtils.getAbsolutePath(fileDir), centerPath);
 
         File dic = new File(dicPath);
         if(!dic.exists()) {
